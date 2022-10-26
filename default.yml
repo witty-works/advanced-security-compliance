@@ -1,0 +1,38 @@
+licensing:
+  # The four main rules types to do everything you need to do for all things
+  #  compliance
+
+  # Warnings will always occur if the rule applies and continues executing to
+  #  other rules.
+  warnings:
+    ids:
+      - other
+      - na
+      - none
+
+  # Ignores are run next so if an ignored rule is hit that matches the level,
+  #  it will be skipped
+  ignores:
+    ids:
+      - apache license 2.0
+      - bsd 3-clause "new" or "revised" license
+    names:
+      # bsd 3-clause "new" or "revised" license -> https://github.com/cunla/fakeredis-py/issues/61
+      - "pip://fakeredis"
+      # bsd 3-clause "new" or "revised" license -> https://github.com/python-babel/babel/pull/912
+      - "pip://babel"
+      # apache license 2.0 -> https://github.com/aio-libs/aiohttp/commit/b618fc6561aa6867a1f8dc30438d3c98ac4c8ef1
+      - "pip://aiohttp"
+
+  # Conditions will only trigger and raise an error when an exact match is hit
+  conditions:
+    ids:
+      - gpl*
+      - lgpl*
+      - agpl*
+
+dependencies:
+  conditions:
+    imports:
+      # Import text list of Typosquatting dependencies
+      names: ghascompliance/defaults/typosquatting.txt
